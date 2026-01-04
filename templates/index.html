@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>祖玛游戏 - Python实现</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-frog"></i> 祖玛游戏</h1>
+            <p class="subtitle">匹配三个或更多相同颜色的球来消除它们！</p>
+        </header>
+
+        <div class="game-container">
+            <div class="sidebar">
+                <div class="game-info">
+                    <h2>游戏信息</h2>
+                    <div class="player-info">
+                        <div class="info-item">
+                            <span class="label">玩家:</span>
+                            <span id="player-name">玩家1</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">分数:</span>
+                            <span id="score">0</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">等级:</span>
+                            <span id="level">1</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">生命:</span>
+                            <span id="lives">3</span> <i class="fas fa-heart" style="color: #e74c3c;"></i>
+                        </div>
+                    </div>
+
+                    <div class="next-ball">
+                        <h3>下一个球:</h3>
+                        <div class="ball-display" id="next-ball"></div>
+                    </div>
+
+                    <div class="controls">
+                        <button id="start-btn" class="btn btn-primary">
+                            <i class="fas fa-play"></i> 开始游戏
+                        </button>
+                        <button id="pause-btn" class="btn btn-secondary">
+                            <i class="fas fa-pause"></i> 暂停
+                        </button>
+                        <button id="restart-btn" class="btn btn-warning">
+                            <i class="fas fa-redo"></i> 重新开始
+                        </button>
+                    </div>
+
+                    <div class="instructions">
+                        <h3>游戏说明</h3>
+                        <ul>
+                            <li>点击鼠标发射彩球</li>
+                            <li>将彩球发射到轨道上的球链中</li>
+                            <li>匹配3个或更多相同颜色的球即可消除</li>
+                            <li>防止球链进入终点！</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-area">
+                <div class="game-header">
+                    <h2>祖玛挑战</h2>
+                    <div class="game-stats">
+                        <span>最高分: <span id="high-score">0</span></span>
+                        <span>时间: <span id="timer">00:00</span></span>
+                    </div>
+                </div>
+
+                <canvas id="game-canvas" width="800" height="600">
+                    您的浏览器不支持Canvas，请升级浏览器以体验游戏。
+                </canvas>
+
+                <div class="game-message" id="game-message"></div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2023 祖玛游戏 - 使用Python Flask和HTML5 Canvas制作</p>
+            <p class="hint">提示: 尝试预判球的轨迹，提前消除可能造成危险的球链！</p>
+        </footer>
+    </div>
+
+    <!-- 游戏结束模态框 -->
+    <div id="game-over-modal" class="modal">
+        <div class="modal-content">
+            <h2>游戏结束</h2>
+            <div class="final-score">
+                <p>最终分数: <span id="final-score">0</span></p>
+                <p>达到等级: <span id="final-level">1</span></p>
+            </div>
+            <div class="modal-buttons">
+                <button id="play-again-btn" class="btn btn-primary">再玩一次</button>
+                <button id="close-modal-btn" class="btn btn-secondary">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 玩家姓名输入模态框 -->
+    <div id="name-modal" class="modal">
+        <div class="modal-content">
+            <h2>请输入您的姓名</h2>
+            <div class="input-group">
+                <input type="text" id="player-name-input" placeholder="玩家姓名" maxlength="10" value="玩家1">
+                <button id="start-game-btn" class="btn btn-primary">开始游戏</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+</body>
+</html>
